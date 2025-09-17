@@ -11,19 +11,22 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Icônes Cupertino (iOS style)
+  # Navigation externe (ouvrir Google, Sekai.one, etc.)
+  url_launcher: ^6.3.0
+
+  # Icônes Cupertino (style iOS)
   cupertino_icons: ^1.0.8
 
-  # Pour consommer l'API Jikan (requêtes HTTP)
+  # Requêtes HTTP (API Jikan)
   http: ^1.2.2
 
-  # Pour lire les vidéos (MP4 / streaming)
+  # Lecture vidéo (MP4 / streaming)
   video_player: ^2.9.2
 
-  # Optionnel: pour avoir un lecteur avec contrôles avancés
+  # Lecteur vidéo avec contrôles (optionnel)
   chewie: ^1.8.1
 
-  # 🎵 pour jouer des sons (Splash)
+  # 🎵 Jouer des sons (Splash, effets)
   audioplayers: ^5.2.1
 
 dev_dependencies:
@@ -32,6 +35,9 @@ dev_dependencies:
 
   flutter_lints: ^5.0.0
 
+  # Générateur d’icônes d’application
+  flutter_launcher_icons: ^0.13.1
+
 flutter:
   uses-material-design: true
 
@@ -39,3 +45,10 @@ flutter:
     - assets/images/
     - assets/data/
     - assets/sounds/
+
+# 🔥 Configuration pour générer l’icône de l’app
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/animeflix.png"  # Ton logo ici
+  min_sdk_android: 21

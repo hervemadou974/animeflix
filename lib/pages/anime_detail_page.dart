@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/anime.dart';
+import '../utils/url_launcher.dart';
 
 class AnimeDetailPage extends StatelessWidget {
   final Anime anime;
@@ -17,28 +18,27 @@ class AnimeDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(anime.image, height: 300),
-              ),
+              child: Image.network(anime.image, height: 250),
             ),
             const SizedBox(height: 16),
             Text(
-              anime.genre,
-              style: const TextStyle(color: Colors.red, fontSize: 16),
+              anime.synopsis,
+              style: const TextStyle(color: Colors.white, fontSize: 14),
             ),
-            const SizedBox(height: 12),
-            Text(anime.synopsis),
             const SizedBox(height: 20),
+
+            // 🔗 Bouton vers Sekai.one
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                minimumSize: const Size(double.infinity, 50),
+                backgroundColor: const Color(0xFFE50914),
               ),
-              onPressed: () {},
-              icon: const Icon(Icons.play_arrow),
-              label: const Text("Lire"),
-            )
+              onPressed: () => openOnSekaione(anime.title),
+              icon: const Icon(Icons.open_in_new, color: Colors.white),
+              label: const Text(
+                "Voir sur Sekai.one",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ],
         ),
       ),

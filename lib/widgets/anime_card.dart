@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/anime.dart';
-import '../pages/anime_detail_page.dart';
+import '../utils/url_launcher.dart';
 
 class AnimeCard extends StatelessWidget {
   final Anime anime;
@@ -10,34 +10,21 @@ class AnimeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => AnimeDetailPage(anime: anime)),
-        );
-      },
+      onTap: () => openOnSekaione(anime.title), // ✅ ouvre Sekai.one
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+          Expanded(
             child: Image.network(
               anime.image,
-              height: 180,
-              width: 120,
               fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 4),
           Text(
             anime.title,
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-            ),
+            style: const TextStyle(color: Colors.white, fontSize: 14),
           ),
         ],
       ),
