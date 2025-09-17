@@ -23,6 +23,9 @@ dependencies:
   # Optionnel: pour avoir un lecteur avec contrôles avancés
   chewie: ^1.8.1
 
+  # 🎵 pour jouer des sons (Splash)
+  audioplayers: ^5.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -32,7 +35,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # Si tu ajoutes des images ou JSON locaux, décommente et ajoute ici
   assets:
     - assets/images/
     - assets/data/
+    - assets/sounds/
