@@ -3,13 +3,14 @@ import 'package:http/http.dart' as http;
 import '../models/anime.dart';
 
 class ApiService {
-  /// Récupère la liste des animés pour une saison donnée
-  /// [page] permet de paginer (supporté par l'API Jikan).
-  static Future<List<Anime>> fetchAnimes({int page = 1}) async {
-    final url = Uri.parse(
-      "https://api.jikan.moe/v4/seasons/2025/fall?page=$page",
-    );
-
+  /// Récupérer une saison (été, automne, hiver, printemps)
+  static Future<List<Anime>> fetchSeason({
+    required int year,
+    required String season, // "summer", "fall", "winter", "spring"
+    int page = 1,
+  }) async {
+    final url =
+        Uri.parse("https://api.jikan.moe/v4/seasons/$year/$season?page=$page");
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -33,4 +34,10 @@ class ApiService {
       throw Exception("Erreur API Jikan: ${response.statusCode}");
     }
   }
+
+  /// Alias pratique pour SearchPage (par ex. Fall 2025)
+  static Future<List<Anime>> fetchAnimes({int page = 1}) {
+    return fetchSeason(year: 2025, season: "fall", page: page);
+  }
 }
+
