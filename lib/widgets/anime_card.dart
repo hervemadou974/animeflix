@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/anime.dart';
-import '../utils/url_launcher.dart';
+import '../pages/anime_detail_page.dart';
 
 class AnimeCard extends StatelessWidget {
   final Anime anime;
@@ -10,7 +10,14 @@ class AnimeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => openOnSekaione(anime.title), // ✅ ouvre Sekai.one
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => AnimeDetailPage(anime: anime),
+          ),
+        );
+      },
       child: Column(
         children: [
           Expanded(

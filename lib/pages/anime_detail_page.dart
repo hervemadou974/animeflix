@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/anime.dart';
-import '../utils/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AnimeDetailPage extends StatelessWidget {
   final Anime anime;
@@ -27,18 +27,35 @@ class AnimeDetailPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // 🔗 Bouton vers Sekai.one
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFE50914),
+            if (anime.links.isNotEmpty) ...[
+              Text(
+                "Regarder",
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
-              onPressed: () => openOnSekaione(anime.title),
-              icon: const Icon(Icons.open_in_new, color: Colors.white),
-              label: const Text(
-                "Voir sur Sekai.one",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+              const SizedBox(height: 8),
+              ...anime.links.map((link) {
+                return ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFE50914),
+                  ),
+                  onPressed: () async {
+                    final uri = Uri.parse(link);
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
+                  },
+                  icon: const Icon(Icons.play_arrow, color: Colors.white),
+                  label: const Text(
+                    "Regarder",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                );
+              }),
+            ],
           ],
         ),
       ),

@@ -1,4 +1,3 @@
-import 'package:characters/characters.dart';
 
 String toSlug(String title) {
   return title

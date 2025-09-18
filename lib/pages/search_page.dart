@@ -7,7 +7,8 @@ class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   Future<List<Anime>> _fetchAnimes(int page) {
-    return ApiService.fetchAnimes(); // ✅ sans paramètre
+    // ✅ ici on choisit une saison précise (ex: Fall 2025)
+    return ApiService.fetchSeason(year: 2025, season: "fall", page: page);
   }
 
   @override
